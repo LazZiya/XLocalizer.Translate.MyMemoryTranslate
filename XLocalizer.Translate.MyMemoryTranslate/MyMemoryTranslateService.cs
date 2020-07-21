@@ -31,7 +31,7 @@ namespace XLocalizer.Translate.MyMemoryTranslate
         public MyMemoryTranslateService(HttpClient httpClient, IConfiguration configuration, ILogger<MyMemoryTranslateService> logger)
         {
             _httpClient = httpClient;
-            _rapidApiKey = configuration["XLocalizer.TranslationServices:RapidApiKey"];
+            _rapidApiKey = configuration["XLocalizer.Translate:RapidApiKey"];
 
             _logger = logger;
         }
