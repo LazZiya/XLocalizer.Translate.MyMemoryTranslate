@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XLocalizer.Translate.MyMemoryTranslate</name>
+    </assembly>
+    <members>
+        <member name="T:XLocalizer.Translate.MyMemoryTranslate.MyMemoryTranslateResult">
+            <summary>
+            MyMemory service tranlate result
+            </summary>
+        </member>
+        <member name="P:XLocalizer.Translate.MyMemoryTranslate.MyMemoryTranslateResult.ResponseData">
+            <summary>
+            Response data
+            </summary>
+        </member>
+        <member name="P:XLocalizer.Translate.MyMemoryTranslate.MyMemoryTranslateResult.ResponseStatus">
+            <summary>
+            Response status
+            </summary>
+        </member>
+        <member name="T:XLocalizer.Translate.MyMemoryTranslate.MyMemoryResposeData">
+            <summary>
+            MyMemory respsponse data
+            </summary>
+        </member>
+        <member name="P:XLocalizer.Translate.MyMemoryTranslate.MyMemoryResposeData.TranslatedText">
+            <summary>
+            Translated text
+            </summary>
+        </member>
+        <member name="T:XLocalizer.Translate.MyMemoryTranslate.MyMemoryTranslateStringTranslator">
+            <summary>
+            MyMemory translation service
+            </summary>
+        </member>
+        <member name="P:XLocalizer.Translate.MyMemoryTranslate.MyMemoryTranslateStringTranslator.ServiceName">
+            <summary>
+            Service name
+            </summary>
+        </member>
+        <member name="M:XLocalizer.Translate.MyMemoryTranslate.MyMemoryTranslateStringTranslator.#ctor(System.Net.Http.HttpClient,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{XLocalizer.Translate.MyMemoryTranslate.MyMemoryTranslateStringTranslator})">
+            <summary>
+            Initialize MyMemory translate service
+            </summary>
+            <param name="httpClient"></param>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:XLocalizer.Translate.MyMemoryTranslate.MyMemoryTranslateStringTranslator.TranslateAsync(System.String,System.String,System.String,System.String)">
+            <summary>
+            Run async translation task
+            </summary>
+            <param name="source">Source language e.g. en</param>
+            <param name="target">Target language e.g. tr</param>
+            <param name="text">Text to be translated</param>
+            <param name="format">Text format: html or text</param>
+            <returns><see cref="T:XLocalizer.Translate.TranslationResult"/></returns>
+        </member>
+        <member name="M:XLocalizer.Translate.MyMemoryTranslate.MyMemoryTranslateStringTranslator.TryTranslate(System.String,System.String,System.String,System.String@)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="target"></param>
+            <param name="text"></param>
+            <param name="translation"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
