@@ -45,6 +45,7 @@
             </summary>
             <param name="httpClient"></param>
             <param name="configuration"></param>
+            <param name="logger"></param>
         </member>
         <member name="M:XLocalizer.Translate.MyMemoryTranslate.MyMemoryTranslateService.TranslateAsync(System.String,System.String,System.String,System.String)">
             <summary>

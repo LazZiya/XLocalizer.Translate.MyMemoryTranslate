@@ -21,17 +21,24 @@ namespace XLocalizer.Translate.MyMemoryTranslate
         private readonly HttpClient _httpClient;
         private readonly ILogger _logger;
 
-        private readonly string _rapidApiKey;
-
         /// <summary>
         /// Initialize MyMemory translate service
         /// </summary>
         /// <param name="httpClient"></param>
         /// <param name="configuration"></param>
+        /// <param name="logger"></param>
         public MyMemoryTranslateService(HttpClient httpClient, IConfiguration configuration, ILogger<MyMemoryTranslateService> logger)
         {
-            _httpClient = httpClient;
-            _rapidApiKey = configuration["XLocalizer.Translate:RapidApiKey"];
+            var _rapidApiKey = configuration["XLocalizer.Translate:RapidApiKey"];
+
+            if (string.IsNullOrWhiteSpace(_rapidApiKey))
+            {
+                throw new NullReferenceException(nameof(_rapidApiKey));
+            }
+
+            _httpClient = httpClient ?? throw new NotImplementedException(nameof(httpClient));
+            _httpClient.DefaultRequestHeaders.Add("x-rapidapi-key", _rapidApiKey);
+            _httpClient.DefaultRequestHeaders.Add("x-rapidapi-host", "translated-mymemory---translation-memory.p.rapidapi.com");
 
             _logger = logger;
         }
@@ -46,16 +53,8 @@ namespace XLocalizer.Translate.MyMemoryTranslate
         /// <returns><see cref="TranslationResult"/></returns>
         public async Task<TranslationResult> TranslateAsync(string source, string target, string text, string format)
         {
-            if (string.IsNullOrWhiteSpace(_rapidApiKey))
-            {
-                throw new NullReferenceException(nameof(_rapidApiKey));
-            }
-
             try
             {
-                _httpClient.DefaultRequestHeaders.Add("x-rapidapi-key", _rapidApiKey);
-                _httpClient.DefaultRequestHeaders.Add("x-rapidapi-host", "translated-mymemory---translation-memory.p.rapidapi.com");
-
                 var response = await _httpClient.GetAsync($"https://translated-mymemory---translation-memory.p.rapidapi.com/api/get?langpair={source}|{target}&q={text}");
                 _logger.LogInformation($"Response: {ServiceName} - {response.StatusCode}");
                 /*
