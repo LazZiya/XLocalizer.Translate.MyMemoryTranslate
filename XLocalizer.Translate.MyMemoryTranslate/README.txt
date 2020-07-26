@@ -1,4 +1,4 @@
-﻿XLocalizer.TranslationServices.MyMemoryTranslate
+﻿XLocalizer.Translate.MyMemoryTranslate
 
 Instructions to use this package :
 
@@ -18,4 +18,4 @@ Instructions to use this package :
 services.AddHttpClient<ITranslator, MyMemoryTranslateService>();
 ````
 
-Repository: https://github.com/LazZiya/TranslationServices
+Repository: https://github.com/LazZiya/XLocalizer.Translate.MyMemoryTranslate
