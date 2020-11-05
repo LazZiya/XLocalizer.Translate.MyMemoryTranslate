@@ -19,3 +19,4 @@ services.AddHttpClient<ITranslator, MyMemoryTranslateService>();
 ````
 
 Repository: https://github.com/LazZiya/XLocalizer.Translate.MyMemoryTranslate
+Docs: https://docs.ziyad.info/en/XLocalizer/v1.0/translate-services-mymemory.md
