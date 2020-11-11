@@ -1,14 +1,25 @@
 ﻿XLocalizer.Translate.MyMemoryTranslate
 
-Instructions to use this package :
+This package contains twoservices, 
+ - MyMemoryTranslateService: directly connected to mymemory translate api's
+ - MyMemoryTranslateServiceRapidApi: connected to mymemory translate via RapidApi
 
-- This package requires Rapid API Key, must be obtained from https://rapidapi.com/translated/api/mymemory-translation-memory
-- Add the API key to user secrets :
+MyMemoryTranslateService
+==========================
+Can be used anonymously without providing any additional parameters, but the daily limit is low!
+For more details see https://mymemory.translated.net/doc/usagelimits.php.
+
+If you want to increase the free daily limit:
+- Get a key from https://mymemory.translated.net/doc/keygen.php
+- add the key and a valid email address to user secrets:
 
 ````
 {
   "XLocalizer.Translate": {
-    "RapidApiKey": "xxx-rapid-api-key-xxx"
+    "MyMemory": {
+        "Email" : "...",
+        "Key": "..."
+    }
   }
 }
 ````
@@ -16,6 +27,26 @@ Instructions to use this package :
 - Register in startup:
 ````
 services.AddHttpClient<ITranslator, MyMemoryTranslateService>();
+````
+
+
+
+ MyMemoryTranslateServiceRapidApi
+ ================================
+- This service requires Rapid API Key, must be obtained from https://rapidapi.com/translated/api/mymemory-translation-memory
+- Add the API key to user secrets :
+
+````
+{
+  "XLocalizer.Translate": {
+    "RapidApiKey": "..."
+  }
+}
+````
+
+- Register in startup:
+````
+services.AddHttpClient<ITranslator, MyMemoryTranslateServiceRapidApi>();
 ````
 
 Repository: https://github.com/LazZiya/XLocalizer.Translate.MyMemoryTranslate
