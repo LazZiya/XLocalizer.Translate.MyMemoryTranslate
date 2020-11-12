@@ -11,16 +11,15 @@ namespace XLocalizer.Translate.MyMemoryTranslate
     /// <summary>
     /// MyMemory translation service
     /// </summary>
-    public class MyMemoryTranslateService : ITranslator
+    public class MyMemoryTranslateServiceRapidApi : ITranslator
     {
         /// <summary>
         /// Service name
         /// </summary>
-        public string ServiceName => "MyMemory Translate";
+        public string ServiceName => "MyMemory Translate - RapidApi";
 
         private readonly HttpClient _httpClient;
         private readonly ILogger _logger;
-        private readonly string _url;
 
         /// <summary>
         /// Initialize MyMemory translate service
@@ -28,24 +27,18 @@ namespace XLocalizer.Translate.MyMemoryTranslate
         /// <param name="httpClient"></param>
         /// <param name="configuration"></param>
         /// <param name="logger"></param>
-        public MyMemoryTranslateService(HttpClient httpClient, IConfiguration configuration, ILogger<MyMemoryTranslateService> logger)
+        public MyMemoryTranslateServiceRapidApi(HttpClient httpClient, IConfiguration configuration, ILogger<MyMemoryTranslateService> logger)
         {
+            var _rapidApiKey = configuration["XLocalizer.Translate:RapidApiKey"];
+
+            if (string.IsNullOrWhiteSpace(_rapidApiKey))
+            {
+                throw new NullReferenceException(nameof(_rapidApiKey));
+            }
+
             _httpClient = httpClient ?? throw new NotImplementedException(nameof(httpClient));
-
-            var email = configuration["XLocalizer.Translate:MyMemory:Email"];
-            var key = configuration["XLocalizer.Translate:MyMemory:Key"];
-            
-            _url = string.Empty;
-
-            if (!string.IsNullOrWhiteSpace(email))
-            {
-                _url += $"&de={email}";
-            }
-
-            if (!string.IsNullOrWhiteSpace(key))
-            {
-                _url += $"&key={key}";
-            }
+            _httpClient.DefaultRequestHeaders.Add("x-rapidapi-key", _rapidApiKey);
+            _httpClient.DefaultRequestHeaders.Add("x-rapidapi-host", "translated-mymemory---translation-memory.p.rapidapi.com");
 
             _logger = logger;
         }
@@ -62,7 +55,7 @@ namespace XLocalizer.Translate.MyMemoryTranslate
         {
             try
             {
-                var response = await _httpClient.GetAsync($"https://api.mymemory.translated.net/get?q={text}&langpair={source}|{target}{_url}");
+                var response = await _httpClient.GetAsync($"https://translated-mymemory---translation-memory.p.rapidapi.com/api/get?langpair={source}|{target}&q={text}");
                 _logger.LogInformation($"Response: {ServiceName} - {response.StatusCode}");
                 /*
                  * Sample response
