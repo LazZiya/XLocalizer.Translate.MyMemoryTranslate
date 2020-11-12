@@ -16,7 +16,7 @@ namespace XLocalizer.Translate.MyMemoryTranslate
         /// <summary>
         /// Service name
         /// </summary>
-        public string ServiceName => "MyMemory Translate";
+        public string ServiceName => "MyMemory Translate - RapidApi";
 
         private readonly HttpClient _httpClient;
         private readonly ILogger _logger;
