@@ -27,14 +27,9 @@ namespace XLocalizer.Translate.MyMemoryTranslate
         /// <param name="httpClient"></param>
         /// <param name="configuration"></param>
         /// <param name="logger"></param>
-        public MyMemoryTranslateServiceRapidApi(HttpClient httpClient, IConfiguration configuration, ILogger<MyMemoryTranslateService> logger)
+        public MyMemoryTranslateServiceRapidApi(HttpClient httpClient, IConfiguration configuration, ILogger<MyMemoryTranslateServiceRapidApi> logger)
         {
-            var _rapidApiKey = configuration["XLocalizer.Translate:RapidApiKey"];
-
-            if (string.IsNullOrWhiteSpace(_rapidApiKey))
-            {
-                throw new NullReferenceException(nameof(_rapidApiKey));
-            }
+            var _rapidApiKey = configuration["XLocalizer.Translate:RapidApiKey"] ?? throw new NullReferenceException("Configuration key for RapidApi was not found! For more details see https://docs.ziyad.info/en/XLocalizer/v1.0/translate-services-mymemory.md");
 
             _httpClient = httpClient ?? throw new NotImplementedException(nameof(httpClient));
             _httpClient.DefaultRequestHeaders.Add("x-rapidapi-key", _rapidApiKey);
